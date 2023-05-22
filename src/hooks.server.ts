@@ -1,10 +1,20 @@
 // src/hooks.server.ts
-import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public'
+import { env } from '$env/dynamic/public'
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit'
 import type { Handle } from '@sveltejs/kit'
 import type { Database } from '$lib/models/supabase'
 
 export const handle: Handle = async ({ event, resolve }) => {
+  const { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } = env
+
+  if (!PUBLIC_SUPABASE_ANON_KEY) {
+    throw new Error('missing supabase anon key')
+  }
+
+  if(!PUBLIC_SUPABASE_URL) {
+    throw new Error('missing supabase url')
+  }
+
   event.locals.supabase = createSupabaseServerClient<Database>({
     supabaseUrl: PUBLIC_SUPABASE_URL,
     supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
