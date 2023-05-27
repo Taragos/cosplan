@@ -5,6 +5,10 @@
 	let { username, supabase, session } = data;
 </script>
 
+<svelte:head>
+	<title>{username}</title>
+</svelte:head>
+
 <div class="p-4">
 	<div class="flex flex-row justify-between items-center py-4">
 		<h1 class="text-8xl text-center mb-4">{username}</h1>

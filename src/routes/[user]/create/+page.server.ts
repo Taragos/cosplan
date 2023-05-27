@@ -58,7 +58,6 @@ export const actions: Actions = {
 		});
 
 		if (err) {
-			console.log(err);
 			return fail(500, {
 				message: 'Server error. Try again later.'
 			});

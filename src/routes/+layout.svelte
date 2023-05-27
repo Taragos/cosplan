@@ -8,7 +8,7 @@
 
 	$: ({ supabase, session } = data);
 
-	onMount(() => {
+	onMount(async () => {
 		const { data } = supabase.auth.onAuthStateChange((event, _session) => {
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
@@ -17,11 +17,8 @@
 
 		return () => data.subscription.unsubscribe();
 	});
-</script>
 
-<svelte:head>
-	<title>User Management</title>
-</svelte:head>
+</script>
 
 <div class="h-screen w-screen md:container mx-auto ">
 	<slot />

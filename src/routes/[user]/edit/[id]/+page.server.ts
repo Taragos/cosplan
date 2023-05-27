@@ -30,7 +30,6 @@ export const load: PageServerLoad = async (event) => {
 			form.data.prerequisites = JSON.parse(JSON.stringify(data.prerequisites));
 		}
 	}
-	console.log(form);
 	return { form };
 };
 
@@ -50,7 +49,6 @@ export const actions: Actions = {
 				form
 			});
 		}
-		console.log(form)
 		const { getSession, supabase } = locals;
 
 		const session = await getSession();
@@ -72,15 +70,11 @@ export const actions: Actions = {
 		const file = formData.get('image');
 		const fileData = await uploadFile(file, supabase);
 
-		console.log("test")
 		const { data, error: err, status } = await supabase.from('cosplay_projects').update({
 			...form.data,
 			image: fileData?.path
 		}).eq('id', id);
 
-		console.log(data)
-		console.log(status)
-		console.log(err)
 		if (err) {
 			return fail(500, {
 				message: 'Server error. Try again later.'

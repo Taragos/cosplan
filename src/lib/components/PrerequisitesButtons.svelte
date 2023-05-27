@@ -13,7 +13,6 @@
 		prerequisites = JSON.parse(JSON.stringify(project.prerequisites));
 	}
 
-	console.log(prerequisites)
 </script>
 
 {#if prerequisites && prerequisites.length > 0}
